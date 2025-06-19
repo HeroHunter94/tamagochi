@@ -1,0 +1,159 @@
+<!--Crear un programa que guarde en un objeto la información sobre un Tamagochi (mascota virtual).
+
+El objeto tamagochi deberá tener 5 atributos: nombre, salud, felicidad, limpieza y energía, 
+cuyos valores pueden ir entre 1 y 10 (poner topes al realizar la función). El valor de las mismas 
+deberán mostrarse por pantalla cada vez que se modifiquen.
+
+El programa debe iniciar mostrando un div donde se solicite el nombre del tamagochi y asignando aleatoriamente 
+los valores de cada atributo.
+
+Luego, debe mostrar un botón para cada una de las siguientes posibles acciones (funciones) a realizar, 
+que modifican los valores de sus variables de la siguiente forma:
+
+alimentar(): +3 energía, +2 felicidad, -1 limpieza
+jugar(): +2 felicidad, -2 energía, -2 limpieza
+dormir(): +5 energía, +2 salud
+vacunar(): +5 salud, -6 felicidad
+duchar(): +3 salud, 10 limpieza
+reprender(): -3 felicidad  (llamar la atención)
+acariciar(): +4 felicidad
+Cuando el usuario ejecute una función, en la pantalla se debe mostrar el valor de sus atributos  salud, felicidad,
+ limpieza y energía, en forma de "carga de pila". 
+
+Para ello usaremos el método String.repeat(). 
+Ejemplo: 
+
+document.getElementById('salud').innerHTML = "⬛".repeat(tamagochi.salud);
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamagochi</title>
+    <link rel = "stylesheet" href = "style.css">
+    <link rel = "icon" type = "webp/jpeg" href = "tamagochi.webp">
+</head>
+<body>
+    <div class = "head">
+        <h1>Tamagochi</h1>
+        <label for = "name">Please insert the name of the Tamagochi</label>
+        <input id = "name" type = "text" required>
+        <button type = "button" onclick = "nameIt()">Name it</button>
+    </div>
+    <div class = "stat">
+        
+        <p id = "nome"></p><br>
+        <img id = "imgHealth" src = "" style="display: none;" alt = "">
+        <p id = "health"></p><br>
+        <img id = "imgHappiness" src = "" style="display: none;" alt = "">
+        <p id = "happiness"></p><br>
+        <img id = "imgClean" src = "" style="display: none;" alt = "">
+        <p id = "clean"></p><br>
+        <img id = "imgEnergy" src = "" style="display: none;" alt = "">
+        <p id = "energy"></p><br>
+    </div>
+    <div class = "button">
+        <button type = "button" id = "feed" onclick = "feeding()" style="display: none;">Feed the kiddo</button>
+        <button type = "button" id = "play" onclick = "play()" style="display: none;">Play with the kiddo</button>
+        <button type = "button" id = "sleep" onclick = "sleep()" style="display: none;">put to Sleep the kiddo</button>
+        <button type = "button" id = "vaccinate" onclick = "vaccinate()" style="display: none;">Vaccinate the kiddo</button>
+        <button type = "button" id = "wash" onclick = "wash()" style="display: none;">Wash the kiddo</button>
+        <button type = "button" id = "slap" onclick = "slap()" style="display: none;">Slap the kiddo</button>
+        <button type = "button" id = "cuddle" onclick = "cuddle()" style="display: none;">Pet the kiddo</button>
+    </div>
+    <p id = "output"></p>
+    <script src = "tamagochi.js"></script>
+    <script>
+        const INPUT = document.getElementById("name");
+        const HEALTH = document.getElementById("health");
+        const HAPPINESS = document.getElementById("happiness");
+        const CLEAN = document.getElementById("clean");
+        const ENERGY = document.getElementById("energy");
+        const NOME = document.getElementById("nome");
+        const IMG1 = document.getElementById("imgHealth");
+        const IMG2 = document.getElementById("imgHappiness");
+        const IMG3 = document.getElementById("imgClean");
+        const IMG4 = document.getElementById("imgEnergy");
+        let length = health.length - 1;
+        
+        function nameIt(){
+            let input = INPUT.value.trim();
+            if (input == "") {
+                NOME.innerHTML = "Please choose a Name!";
+                return;
+            }
+            console.log(input);
+            statTama.name = input;
+            statTama.health = Math.floor(Math.random() * 5);
+            statTama.clean = Math.floor(Math.random() * 5);
+            statTama.happiness = Math.floor(Math.random() * 5);
+            statTama.energy = Math.floor(Math.random() * 5);
+            console.log( statTama.name, statTama.health, statTama.clean, statTama.happiness, statTama.energy);
+            document.getElementById("feed").style.display = "inline";
+            document.getElementById("play").style.display = "inline";
+            document.getElementById("sleep").style.display = "inline";
+            document.getElementById("vaccinate").style.display = "inline";
+            document.getElementById("wash").style.display = "inline";
+            document.getElementById("slap").style.display = "inline";
+            document.getElementById("cuddle").style.display = "inline";
+            showStat();
+        }
+        function feeding(){
+            statTama.energy = statTama.energy + 3 < length ? statTama.energy + 3 : length;
+            statTama.happiness =  statTama.happiness + 2 < length ?  statTama.happiness + 2 : length;
+            statTama.clean = statTama.clean - 1 >= 0 ? statTama - 1 : 0;
+            showStat();
+        }
+        function play(){
+            statTama.energy = statTama.energy -2  >= 0 ? statTama.energy - 2 : 0;
+            statTama.happiness =  statTama.happiness + 2 < length ?  statTama.happiness + 2 : length;
+            statTama.clean = statTama.clean - 2 >= 0 ? statTama.clean - 2 : 0;
+            showStat();
+        }
+        function sleep(){
+            statTama.energy = statTama.energy + 3 < length ? statTama.energy + 3 : length;
+            statTama.health = statTama.health + 1 < length ? statTama.health + 1 : length;
+            showStat();
+        }
+        function vaccinate(){
+            statTama.health = statTama.health + 3 < length ? statTama.health + 3 : length;
+            statTama.happiness =  statTama.happiness - 3 >= 0 ?  statTama.happiness - 3 : 0;
+            showStat();
+        }
+        function wash(){
+            statTama.clean = statTama.clean + 2 < length ? statTama.clean + 2 : length;
+            statTama.health = statTama.health + 2 < length ? statTama.health + 2 : length;
+            showStat();
+        }
+        function slap(){
+            statTama.happiness =  statTama.happiness - 2 >= 0 ?  statTama.happiness - 2 : 0;
+            showStat();
+        }
+        function cuddle(){
+            statTama.happiness =  statTama.happiness + 2 < length ?  statTama.happiness + 2 : length;
+            showStat();
+        }
+        function showStat(){
+            console.log(statTama.health, statTama.clean, statTama.happiness, statTama.energy)
+            NOME.innerHTML = "Your Tamagochi " + statTama.name + " Stat are:";
+            IMG4.src = ROUTE + health[statTama.health];
+            IMG4.style.display = "block";
+            ENERGY.innerHTML = "Energy" + "⬛".repeat(statTama.health);
+            IMG2.src = ROUTE + happiness[statTama.happiness];
+            console.log(ROUTE + happiness[statTama.happiness]);
+            IMG2.style.display = "block";
+            HAPPINESS.innerHTML = "Happiness" + "⬛".repeat(statTama.happiness);
+            IMG3.src = ROUTE + clean[statTama.clean];
+            IMG3.style.display = "block";
+            CLEAN.innerHTML = "Clean" + "⬛".repeat(statTama.clean);
+            IMG1.src = ROUTE + energy[statTama.energy];
+            IMG1.style.display = "block";
+            HEALTH.innerHTML = "Health" + "⬛".repeat(statTama.energy);
+            
+
+        }
+    </script>
+</body>
+</html>
