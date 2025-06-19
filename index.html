@@ -103,13 +103,13 @@ document.getElementById('salud').innerHTML = "⬛".repeat(tamagochi.salud);
         function feeding(){
             statTama.energy = statTama.energy + 3 < length ? statTama.energy + 3 : length;
             statTama.happiness =  statTama.happiness + 2 < length ?  statTama.happiness + 2 : length;
-            statTama.clean = statTama.clean - 1 >= 0 ? statTama - 1 : 0;
+            statTama.clean = statTama.clean - 1 > 0 ? statTama - 1 : 0;
             showStat();
         }
         function play(){
             statTama.energy = statTama.energy -2  >= 0 ? statTama.energy - 2 : 0;
             statTama.happiness =  statTama.happiness + 2 < length ?  statTama.happiness + 2 : length;
-            statTama.clean = statTama.clean - 2 >= 0 ? statTama.clean - 2 : 0;
+            statTama.clean = statTama.clean - 2 > 0 ? statTama.clean - 2 : 0;
             showStat();
         }
         function sleep(){
@@ -119,7 +119,7 @@ document.getElementById('salud').innerHTML = "⬛".repeat(tamagochi.salud);
         }
         function vaccinate(){
             statTama.health = statTama.health + 3 < length ? statTama.health + 3 : length;
-            statTama.happiness =  statTama.happiness - 3 >= 0 ?  statTama.happiness - 3 : 0;
+            statTama.happiness =  statTama.happiness - 3 > 0 ?  statTama.happiness - 3 : 0;
             showStat();
         }
         function wash(){
@@ -128,7 +128,7 @@ document.getElementById('salud').innerHTML = "⬛".repeat(tamagochi.salud);
             showStat();
         }
         function slap(){
-            statTama.happiness =  statTama.happiness - 2 >= 0 ?  statTama.happiness - 2 : 0;
+            statTama.happiness =  statTama.happiness - 2 > 0 ?  statTama.happiness - 2 : 0;
             showStat();
         }
         function cuddle(){
