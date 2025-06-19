@@ -103,7 +103,7 @@ document.getElementById('salud').innerHTML = "⬛".repeat(tamagochi.salud);
         function feeding(){
             statTama.energy = statTama.energy + 3 < length ? statTama.energy + 3 : length;
             statTama.happiness =  statTama.happiness + 2 < length ?  statTama.happiness + 2 : length;
-            statTama.clean = statTama.clean - 1 > 0 ? statTama - 1 : 0;
+            statTama.clean = statTama.clean - 1 > 0 ? statTama.clean - 1 : 0;
             showStat();
         }
         function play(){
